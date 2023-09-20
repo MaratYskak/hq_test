@@ -1,6 +1,6 @@
 from rest_framework.routers import SimpleRouter
 
-from hq_test_app.api.views import UserViewSet, UserLessonsView
+from .views import UserViewSet, UserLessonsView
 
 router = SimpleRouter()
 router.register(r'users', UserViewSet, basename="users")

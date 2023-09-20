@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from hq_test_proj.hq_test_app.models import Lesson, LessonView
+from ..models import Lesson, LessonView
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -26,13 +26,38 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
         )
         return user
+    
+class UserListSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "password",
+            "email",
+            "first_name",
+            "last_name",
+        )
+    
+class UserRetrieveSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "password",
+            "email",
+            "first_name",
+            "last_name",
+        )
+
 
 class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
-        fields = ('id', 'title', 'video_link', 'duration')
+        fields = '__all__'
 
 class LessonViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonView
-        fields = ('lesson', 'user', 'viewed', 'viewed_time_seconds')
+        fields = '__all__'
