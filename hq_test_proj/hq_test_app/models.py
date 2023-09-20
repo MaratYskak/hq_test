@@ -12,6 +12,9 @@ class Lesson(models.Model):
     products = models.ManyToManyField(Product, related_name='lessons')
 
 class LessonView(models.Model):
+    """
+    отслеживает просмотр уроков пользователями
+    """
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     viewed = models.BooleanField(default=False)
