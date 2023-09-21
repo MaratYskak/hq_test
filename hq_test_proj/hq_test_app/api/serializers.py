@@ -60,8 +60,8 @@ class LessonSerializer(serializers.ModelSerializer):
 class LessonViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonView
-        fields = ['viewed', 'viewed_time_seconds', 'user', 'lesson']
-        read_only_fields = ['viewed']
+        fields = ['viewed', 'viewed_time_seconds', 'user', 'lesson', 'last_viewed_at']
+        read_only_fields = ['viewed', 'last_viewed_at']
 
 class ProductStatsSerializer(serializers.Serializer):
     id = serializers.IntegerField(source='pk')
