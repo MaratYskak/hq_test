@@ -1,14 +1,17 @@
 from rest_framework.viewsets import GenericViewSet 
 from rest_framework.mixins import CreateModelMixin
-from .serializers import LessonViewSerializer, UserRegistrationSerializer, UserRetrieveSerializer, UserListSerializer
+from .serializers import LessonViewSerializer, ProductStatsSerializer, UserRegistrationSerializer, UserRetrieveSerializer, UserListSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin
 from django.contrib.auth.models import User
 from rest_framework.decorators import action
+from django.db.models import Count, Sum, F, ExpressionWrapper, FloatField
+from django.db.models.functions import Cast
+from rest_framework.views import APIView
 
-from ..models import Lesson, LessonView
+from ..models import Lesson, LessonView, Product
 
 
 class UserViewSet(CreateModelMixin, ListModelMixin,
@@ -81,3 +84,24 @@ class Subscribe(viewsets.ViewSet):
         serializer = LessonViewSerializer(lesson_view)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+
+class ProductStatsViewSet(viewsets.ViewSet):
+    def list(self, request):
+        products = Product.objects.annotate(
+            total_views=Count('lessons__lessonview', filter=F('lessons__lessonview__viewed')),
+            total_view_time=Sum('lessons__lessonview__viewed_time_seconds', filter=F('lessons__lessonview__viewed')),
+            total_students=Count('lessons__lessonview__user', distinct=True, filter=F('lessons__lessonview__viewed')),
+        )
+
+        total_users = User.objects.count()
+
+        for product in products:
+            if total_users == 0:
+                product.purchase_percentage = 0
+            else:
+                product.purchase_percentage = (
+                    product.total_students / total_users * 100
+                )
+
+        serializer = ProductStatsSerializer(products, many=True)
+        return Response(serializer.data)

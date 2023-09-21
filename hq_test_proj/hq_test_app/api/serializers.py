@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from ..models import Lesson, LessonView
+from ..models import Lesson, LessonView, Product
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,3 +62,26 @@ class LessonViewSerializer(serializers.ModelSerializer):
         model = LessonView
         fields = ['viewed', 'viewed_time_seconds', 'user', 'lesson']
         read_only_fields = ['viewed']
+
+class ProductStatsSerializer(serializers.Serializer):
+    id = serializers.IntegerField(source='pk')
+    name = serializers.CharField()
+    total_views = serializers.SerializerMethodField()
+    total_view_time = serializers.SerializerMethodField()
+    total_students = serializers.SerializerMethodField()
+    purchase_percentage = serializers.SerializerMethodField()
+
+    def get_total_views(self, obj):
+        return obj.total_views
+
+    def get_total_view_time(self, obj):
+        return obj.total_view_time
+
+    def get_total_students(self, obj):
+        return obj.total_students
+
+    def get_purchase_percentage(self, obj):
+        total_users = User.objects.count()
+        if total_users == 0:
+            return 0
+        return (obj.total_students / total_users) * 100
