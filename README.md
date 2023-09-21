@@ -17,8 +17,8 @@ Request body</br>
 
 Response body</br>
 {</br>
-  "refresh": "eyJhbGcaCIsImV4cCI6MTY5NTM2ODMxMiwiaWF0IjoxNjk1MjgxOTEyLCJqdGkiOiI4YWJkODgwZTUxNTI0ZGU0OTcxOGFhNGFkOGExYjlmZCIsInVzZXJfaWQiOjF9.F-JusNw-YHJwhciGwxlfDQ0jqQSRXylxgOk4qMEsUnY",</br>
-  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlCJpYXQiOjE2OTUyODE5MTIsImp0aSI6ImFjYzI4NmZkODgxMjRmOWI4OWE0OWZjYzI4ZWViOThjIiwidXNlcl9pZCI6MX0.A-TmpmxjDeoOS3J5swmVPW0-fnXI5pbWCsXCprD_Hak"</br>
+  "refresh": "yourtoken",</br>
+  "access": "yourtoken"</br>
 }</br>
 
 
