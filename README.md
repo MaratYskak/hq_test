@@ -66,6 +66,33 @@ POST /api/subscribe/
 }
 ```
 
+## для отображения статистики по продуктам
+GET /api/stats/
+
+### Пример ответа
+
+```json
+[
+  {
+    "id": 1,
+    "name": "test_product_1",
+    "total_views": 1,
+    "total_view_time": 81,
+    "total_students": 1,
+    "purchase_percentage": 50
+  },
+  {
+    "id": 3,
+    "name": "product_of_user_2",
+    "total_views": 0,
+    "total_view_time": null,
+    "total_students": 0,
+    "purchase_percentage": 0
+  }
+]
+```
+
+
 
 
 
