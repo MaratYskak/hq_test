@@ -9,13 +9,15 @@
 POST   /api/token/</br>
 POST   /api/token/refresh/
 
-Request body</br>
+### Пример запроса</br>
+```json
 {</br>
   "username": "string",</br>
   "password": "string"</br>
 }</br>
 
-Response body</br>
+### Пример ответа</br>
+```json
 {</br>
   "refresh": "yourtoken",</br>
   "access": "yourtoken"</br>
