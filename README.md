@@ -36,16 +36,30 @@ GET  /api/lesson-status/
 ```json
 [
   {
-    "id": 1,
     "viewed": true,
     "viewed_time_seconds": 81,
     "user": 1,
-    "lesson": 1
+    "lesson": 1,
+    "last_viewed_at": "2023-09-21T09:02:02.750767Z"
+  },
+  {
+    "viewed": false,
+    "viewed_time_seconds": 50,
+    "user": 1,
+    "lesson": 2,
+    "last_viewed_at": "2023-09-21T09:02:02.750767Z"
+  },
+  {
+    "viewed": false,
+    "viewed_time_seconds": 10,
+    "user": 1,
+    "lesson": 3,
+    "last_viewed_at": "2023-09-21T09:02:02.750767Z"
   }
 ]
 ```
 
-## Записать пользователя на урок
+## Записать пользователя на урок или обновить данные о просмотре урока
 POST /api/subscribe/
 
 ### Пример запроса
