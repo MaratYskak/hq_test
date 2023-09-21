@@ -9,19 +9,21 @@
 POST   /api/token/</br>
 POST   /api/token/refresh/
 
-### Пример запроса</br>
+### Пример запроса
 ```json
-{</br>
-  "username": "string",</br>
-  "password": "string"</br>
-}</br>
+{
+  "username": "string",
+  "password": "string"
+}
+```
 
-### Пример ответа</br>
+### Пример ответа
 ```json
-{</br>
-  "refresh": "yourtoken",</br>
-  "access": "yourtoken"</br>
-}</br>
+{
+  "refresh": "yourtoken",
+  "access": "yourtoken"
+}
+```
 
 
 ## Получение списка уроков
@@ -41,6 +43,7 @@ GET  /api/lesson-status/
     "lesson": 1
   }
 ]
+```
 
 
 
