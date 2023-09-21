@@ -45,6 +45,27 @@ GET  /api/lesson-status/
 ]
 ```
 
+## Записать пользователя на урок
+POST /api/subscribe/
+
+### Пример запроса
+```json
+{
+  "viewed_time_seconds": 0,
+  "user": id,
+  "lesson": id
+}
+```
+### Пример ответа
+
+```json
+{
+  "viewed_time_seconds": 0,
+  "user": 1,
+  "lesson": 3
+}
+```
+
 
 
 
