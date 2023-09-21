@@ -10,7 +10,7 @@ GET   /api/token
 
 Request body</br>
 {</br>
-  "username": "string",
+  "username": "string",</br>
   "password": "string"</br>
 }</br>
 
