@@ -60,4 +60,5 @@ class LessonSerializer(serializers.ModelSerializer):
 class LessonViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = LessonView
-        fields = '__all__'
+        fields = ['viewed', 'viewed_time_seconds', 'user', 'lesson']
+        read_only_fields = ['viewed']

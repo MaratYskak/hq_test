@@ -19,3 +19,12 @@ class LessonView(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     viewed = models.BooleanField(default=False)
     viewed_time_seconds = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        # Проверяем, насколько процентов просмотрен урок
+        if self.viewed_time_seconds >= (self.lesson.duration_seconds * 0.8):
+            self.viewed = True
+        else:
+            self.viewed = False
+
+        super().save(*args, **kwargs)

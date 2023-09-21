@@ -56,3 +56,28 @@ class UserLessonsView(viewsets.ViewSet):
         serializer = LessonViewSerializer(user_lessons, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+class Subscribe(viewsets.ViewSet):
+    serializer_class = LessonViewSerializer
+
+    def create(self, request):
+        user = request.user
+        lesson_id = request.data.get('lesson')
+
+        try:
+            lesson = Lesson.objects.get(id=lesson_id)
+        except Lesson.DoesNotExist:
+            return Response({'error': 'Урок не найден'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Проверяем, не записан ли пользователь уже на этот урок
+        existing_record = LessonView.objects.filter(user=user, lesson=lesson).first()
+        if existing_record:
+            return Response({'error': 'Вы уже записаны на этот урок'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Создаем запись пользователя на урок
+        lesson_view = LessonView.objects.create(user=user, lesson=lesson)
+
+        serializer = LessonViewSerializer(lesson_view)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
