@@ -33,7 +33,6 @@ class UserListSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             "username",
-            "password",
             "email",
             "first_name",
             "last_name",
@@ -45,7 +44,6 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             "username",
-            "password",
             "email",
             "first_name",
             "last_name",
@@ -75,7 +73,7 @@ class ProductStatsSerializer(serializers.Serializer):
         return obj.total_views
 
     def get_total_view_time(self, obj):
-        return obj.total_view_time
+        return obj.total_view_time or 0
 
     def get_total_students(self, obj):
         return obj.total_students
