@@ -51,7 +51,7 @@ class UserLessonsView(viewsets.ViewSet):
     def list(self, request):
         user = request.user
 
-        user_lessons = LessonView.objects.filter(user=user, viewed=True)
+        user_lessons = LessonView.objects.filter(user=user)
 
         serializer = LessonViewSerializer(user_lessons, many=True)
 
